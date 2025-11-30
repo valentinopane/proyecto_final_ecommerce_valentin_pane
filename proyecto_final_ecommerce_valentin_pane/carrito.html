@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Carrito - Pane & Vino</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="icon" href="./img/icona.ico" />
+</head>
+
+<body>
+    <header>
+        <img src="./img/logo1.png" alt="logo" class="logo" />
+        <nav>
+            <ul class="user-nav">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="./carrito.html">Carrito</a></li>
+                <li><a href="./contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <h1>TU CARRITO</h1>
+    </header>
+
+    <main>
+        <section class="section-products">
+            <ul id="lista-carrito" class="carrito-lista"></ul>
+            <div id="total-carrito" class="carrito-lista-item" style="display: none;">
+
+                Total a pagar: $<span id="importe-total">0</span>
+
+            </div>
+
+
+
+        </section>
+        <section class="section-products">
+
+            <button id="vaciar-carrito" class="btn-add btn-small" style="margin-top: 10px;">
+
+                Vaciar carrito
+            </button>
+
+
+
+            <button id="btn-pagar" class="btn-add btn-small" style="margin-top: 10px; display: none;">
+
+                Pagar
+            </button>
+        </section>
+
+    </main>
+
+    <footer>
+        <img src="./img/logo1.png" alt="logo" class="logo" />
+        <p>&copy; 2025 Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Ejecutar cuando la página cargue
+        document.addEventListener("DOMContentLoaded", () => {
+            // Si estamos en carrito.html, actualizar la lista
+            if (document.getElementById("lista-carrito")) {
+                actualizarCarrito();
+            }
+
+            // Vaciar carrito (solo si existe el botón)
+            const btnVaciar = document.getElementById("vaciar-carrito");
+            if (btnVaciar) {
+                btnVaciar.addEventListener("click", () => {
+                    localStorage.removeItem("carrito");
+                    actualizarCarrito();
+                    alert("Carrito vaciado");
+                });
+            }
+
+            // Botón pagar
+            const btnPagar = document.getElementById("btn-pagar");
+            if (btnPagar) {
+                btnPagar.addEventListener("click", () => {
+                    alert("¡Gracias por tu compra! Aquí redirigirías al link de pago.");
+
+                });
+            }
+        });
+
+        // Función para mostrar el carrito agrupado por producto
+        function actualizarCarrito() {
+            const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            const lista = document.getElementById("lista-carrito");
+
+            if (!lista) return;
+
+            lista.innerHTML = "";
+
+            if (carrito.length === 0) {
+                lista.innerHTML = "<li>El carrito está vacío.</li>";
+                ocultarTotalYPagar();
+                return;
+            }
+
+            // Agrupar productos por id y contar cantidad
+            const agrupados = carrito.reduce((acc, producto) => {
+                if (!acc[producto.id]) {
+                    acc[producto.id] = { ...producto, cantidad: 1 };
+                } else {
+                    acc[producto.id].cantidad++;
+                }
+                return acc;
+            }, {});
+
+            // Mostrar lista con nombre, precio, cantidad y botón eliminar
+            Object.values(agrupados).forEach(producto => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <div class="producto-info">
+                        <span class="cantidad"> ${producto.cantidad}</span>
+                        <span>${producto.nombre} - $${producto.precio.toLocaleString("es-AR")}</span>
+                    </div>
+                    <button class="btn-eliminar" data-id="${producto.id}">Eliminar</button>
+                `;
+                lista.appendChild(li);
+            });
+
+            // Mostrar total y botón pagar
+            mostrarTotalYPagar(agrupados);
+
+            // Activar eventos de los botones eliminar
+            activarBotonesEliminar();
+        }
+
+        function mostrarTotalYPagar(agrupados) {
+            const total = Object.values(agrupados).reduce((sum, producto) => {
+                return sum + producto.precio * producto.cantidad;
+            }, 0);
+
+            const contenedorTotal = document.getElementById("total-carrito");
+            const importeTotal = document.getElementById("importe-total");
+            const botonPagar = document.getElementById("btn-pagar");
+
+            if (total > 0) {
+                importeTotal.textContent = total.toLocaleString("es-AR");
+                contenedorTotal.style.display = "block";
+                botonPagar.style.display = "inline-block";
+            } else {
+                ocultarTotalYPagar();
+            }
+        }
+
+        function ocultarTotalYPagar() {
+            document.getElementById("total-carrito").style.display = "none";
+            document.getElementById("btn-pagar").style.display = "none";
+        }
+
+        // Función para activar los botones eliminar
+        function activarBotonesEliminar() {
+            const botonesEliminar = document.querySelectorAll(".btn-eliminar");
+
+            botonesEliminar.forEach(boton => {
+                boton.addEventListener("click", () => {
+                    const idProducto = boton.getAttribute("data-id");
+                    eliminarProductoDelCarrito(idProducto);
+                });
+            });
+        }
+
+        // Función para eliminar producto del carrito
+        function eliminarProductoDelCarrito(id) {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+            // Buscar el índice del primer producto con ese id para eliminar uno a uno
+            const indice = carrito.findIndex(producto => producto.id === id);
+
+            if (indice !== -1) {
+                carrito.splice(indice, 1); // elimina solo un producto con ese id
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+                actualizarCarrito();
+                alert("Producto eliminado del carrito");
+            }
+        }
+    </script>
+</body>
+
+</html>
