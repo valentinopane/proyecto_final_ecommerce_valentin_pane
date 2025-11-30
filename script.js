@@ -1,4 +1,4 @@
-// script.js — Mejorado: búsqueda, dark mode, animación al agregar y paginación
+// script.js — Mejorado: búsqueda, animación al agregar y paginación
 // -----------------------------------------------------------
 // Configuración
 const API_URL = "https://fakestoreapi.com/products"; // API pública
@@ -14,9 +14,9 @@ const carritoPanel = document.getElementById("carrito-panel");
 const carritoLista = document.getElementById("carrito-lista");
 const carritoTotal = document.getElementById("carrito-total");
 
-// Crear/insertar controles (search, tema, paginación) si no existen
+// Crear/insertar controles (search, paginación) si no existen
 function crearControlesUI() {
-// Wrapper para controles encima de productos
+    // Wrapper para controles encima de productos
     let controles = document.getElementById("controles-productos");
     if (!controles) {
         controles = document.createElement("div");
@@ -31,7 +31,7 @@ function crearControlesUI() {
         listaProductos.parentNode.insertBefore(controles, listaProductos);
     }
 
-// Buscador (input)
+    // Buscador (input)
     if (!document.getElementById("buscador-productos")) {
         const buscador = document.createElement("input");
         buscador.id = "buscador-productos";
@@ -48,7 +48,7 @@ function crearControlesUI() {
         controles.appendChild(buscador);
     }
 
-// Contenedor de paginación
+    // Contenedor de paginación
     if (!document.getElementById("paginacion-productos")) {
         const pagWrap = document.createElement("div");
         pagWrap.id = "paginacion-productos";
@@ -58,61 +58,6 @@ function crearControlesUI() {
         // lo insertamos después de la lista de productos (en el DOM)
         listaProductos.parentNode.insertBefore(pagWrap, listaProductos.nextSibling);
     }
-}
-
-// Aplica tema (y actualiza texto del toggle)
-function aplicarTema(tema) {
-    const toggle = document.getElementById("toggle-tema");
-    if (!toggle) return;
-    if (tema === "dark") {
-        document.body.classList.add("dark-mode");
-        toggle.innerText = "Oscuro";
-    } else {
-        document.body.classList.remove("dark-mode");
-        toggle.innerText = "Claro";
-    }
-}
-
-// Inyectar CSS para modo oscuro y pequeñas mejoras (si no está ya)
-function inyectarEstilosDinamicos() {
-    if (document.getElementById("estilos-mercadito")) return;
-    const css = `
-    /* estilos añadidos por script.js */
-    .producto-card { background: white; }
-    body.dark-mode {
-        background: #121217 !important;
-        color: #e6e6e6 !important;
-    }
-    body.dark-mode header, body.dark-mode footer {
-        background:#0b0b0c !important; color:#e6e6e6 !important;
-    }
-    body.dark-mode .nav-link { color: #ddd !important; }
-    body.dark-mode .producto-card {
-        background:#1b1b1f;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.6);
-        color: #eee;
-    }
-    body.dark-mode .cajita-reseña { background:#16161a; color:#ddd; }
-    body.dark-mode .formulario-contacto input, body.dark-mode .formulario-contacto textarea {
-        background:#151518; border-color:#2a2a2f; color:#ddd;
-    }
-    /* animación "volar al carrito" */
-    .fly-image {
-        position:fixed;
-        z-index:2000;
-        pointer-events:none;
-        will-change: transform, opacity;
-        transition: transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s ease;
-        border-radius:8px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.35);
-    }
-    /* carrito panel ajustado */
-    .carrito-panel { transition: right .35s ease; }
-    `;
-    const style = document.createElement("style");
-    style.id = "estilos-mercadito";
-    style.appendChild(document.createTextNode(css));
-    document.head.appendChild(style);
 }
 
 // ==============================
@@ -168,7 +113,7 @@ function renderProductosPagina(page) {
         const col = document.createElement("div");
         col.className = "col-md-4 mb-3";
 
-        // tarjeta producto (evitamos handlers inline)
+        // tarjeta producto
         const card = document.createElement("div");
         card.className = "producto-card";
         card.style.padding = "12px";
@@ -224,7 +169,6 @@ function renderPaginacion(totalPaginas) {
     const pag = document.getElementById("paginacion-productos");
     pag.innerHTML = "";
 
-    // Si solo hay 1 página, no mostramos controles
     if (totalPaginas <= 1) return;
 
     const prev = document.createElement("button");
@@ -239,7 +183,6 @@ function renderPaginacion(totalPaginas) {
 
     pag.appendChild(prev);
 
-    // números de página (si hay muchas páginas, mostramos ventana)
     const maxButtons = 7;
     let start = Math.max(1, paginaActual - 3);
     let end = Math.min(totalPaginas, start + maxButtons - 1);
@@ -277,12 +220,11 @@ function renderPaginacion(totalPaginas) {
 }
 
 // ==============================
-//  Modal simple (detalle)
+// Modal simple (detalle)
 // ==============================
 let modalOverlay = null;
 
 function mostrarDetalle(prod) {
-    // quitar modal previo
     if (modalOverlay) modalOverlay.remove();
 
     modalOverlay = document.createElement("div");
@@ -309,11 +251,6 @@ function mostrarDetalle(prod) {
     modal.style.maxHeight = "85vh";
     modal.style.overflowY = "auto";
 
-    if (document.body.classList.contains("dark-mode")) {
-        modal.style.background = "#1b1b1f";
-        modal.style.color = "#eee";
-    }
-
     modal.innerHTML = `
         <div style="display:flex; gap:12px; align-items:flex-start;">
             <img src="${prod.image}" style="width:160px; height:160px; object-fit:contain; border-radius:8px" alt="${escapeHtml(prod.title)}" />
@@ -335,7 +272,6 @@ function mostrarDetalle(prod) {
     document.getElementById("modal-close").addEventListener("click", () => modalOverlay.remove());
     document.getElementById("modal-add").addEventListener("click", (e) => {
         agregarAlCarrito(prod);
-        // animar - buscamos img dentro del modal
         const imgElem = modal.querySelector("img");
         animarImagenAlCarrito(e, imgElem);
         modalOverlay.remove();
@@ -351,7 +287,7 @@ function escapeHtml(txt) {
 }
 
 // ==============================
-//  Carrito (persistente)
+// Carrito (persistente)
 // ==============================
 let carrito = JSON.parse(localStorage.getItem("mercadito_carrito_v1")) || [];
 
@@ -415,15 +351,12 @@ document.addEventListener("click", (event) => {
     const esClickDentroDelCarrito = carritoPanel.contains(event.target);
     const esBotonCarrito = carritoBtn.contains(event.target);
 
-    // Si el panel está abierto y el click NO es dentro ni del botón, se cierra
     if (carritoPanel.classList.contains("abierto") &&
         !esClickDentroDelCarrito &&
         !esBotonCarrito) {
-
         carritoPanel.classList.remove("abierto");
     }
 });
-
 
 // Render del carrito
 function actualizarCarrito() {
@@ -437,7 +370,6 @@ function actualizarCarrito() {
             div.style.padding = "10px";
             div.style.borderRadius = "8px";
             div.style.marginBottom = "8px";
-            if (document.body.classList.contains("dark-mode")) div.style.background = "#151517";
 
             div.innerHTML = `
                 <strong style="display:block">${escapeHtml(item.titulo)}</strong>
@@ -456,7 +388,7 @@ function actualizarCarrito() {
 
     // Delegación de eventos para botones del carrito
     carritoLista.querySelectorAll("button").forEach(btn => {
-        btn.addEventListener("click", (e) => {
+        btn.addEventListener("click", () => {
             const action = btn.getAttribute("data-action");
             const idx = Number(btn.getAttribute("data-index"));
             if (action === "minus") {
@@ -476,11 +408,14 @@ function actualizarCarrito() {
 
     const total = carrito.reduce((acc, it) => acc + it.precio * it.cantidad, 0);
     carritoTotal.textContent = "$" + total.toFixed(2);
-    carritoBtn.textContent = `Carrito (${carrito.reduce((a, b) => a + b.cantidad, 0)})`;
+
+    // Actualizo solo el número dentro del span sin tocar el SVG
+    const carritoCantidad = document.getElementById("carrito-cantidad");
+    carritoCantidad.textContent = carrito.reduce((a, b) => a + b.cantidad, 0);
 }
 
 // ==============================
-//  Animación: imagen vuela al carrito
+// Animación: imagen vuela al carrito
 // ==============================
 function animarImagenAlCarrito(clickEvent, imgElement) {
     if (!imgElement) return;
@@ -510,7 +445,6 @@ function animarImagenAlCarrito(clickEvent, imgElement) {
     // limpiar después de la animación
     setTimeout(() => {
         fly.remove();
-        // pequeño efecto de "shake" en botón carrito
         carritoBtn.animate([
             { transform: "translateY(0)" },
             { transform: "translateY(-6px)" },
@@ -519,23 +453,15 @@ function animarImagenAlCarrito(clickEvent, imgElement) {
     }, 650);
 }
 
-
-
 // ==============================
 // Inicialización
 // ==============================
 function inicializar() {
     crearControlesUI();
-    inyectarEstilosDinamicos();
-
-    // aplicar tema guardado
-    const temaGuardado = localStorage.getItem("mercadito_tema") || "light";
-    aplicarTema(temaGuardado);
-
-    // cargar productos y carrito existente
     fetchProductos();
     actualizarCarrito();
 }
 
 // Ejecutar
 inicializar();
+
