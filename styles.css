@@ -1,0 +1,206 @@
+/* ============================
+   Estilos generales
+============================ */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+h1,
+h2 {
+    font-weight: 600;
+}
+
+header h1 {
+    letter-spacing: 1px;
+}
+
+.header-azul {
+    background-color: #152a55; /* azul oscuro elegante */
+}
+
+
+/* ============================
+   NAV
+============================ */
+nav {
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-link {
+    color: #333 !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #0d6efd !important;
+}
+
+/* ============================
+   Productos
+============================ */
+
+#lista-productos .producto-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#lista-productos .producto-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.producto-card img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* ============================
+   Reseñas
+============================ */
+
+.grid-reseñas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.cajita-reseña {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    font-weight: 300;
+}
+
+/* ============================
+   Formulario de contacto
+============================ */
+.formulario-contacto {
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formulario-contacto input,
+.formulario-contacto textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.formulario-contacto button {
+    padding: 12px;
+    border: none;
+    background: #0d6efd;
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+.formulario-contacto button:hover {
+    background: #084cdf;
+}
+
+/* ============================
+   Botón Carrito
+============================ */
+
+.carrito-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 999;
+    padding: 12px 18px;
+    border-radius: 50px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+    font-weight: 600;
+}
+
+/* ============================
+   Panel lateral del carrito
+============================ */
+
+.carrito-panel {
+    position: fixed;
+    top: 0;
+    right: -350px;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    border-left: 2px solid #eee;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.carrito-panel.abierto {
+    right: 0;
+}
+
+#carrito-lista {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+#carrito-lista div {
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.cerrar-carrito-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    border: none;
+    font-weight: bold;
+    background: transparent;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.cerrar-carrito-btn:hover {
+    color: #ffdddd;
+}
+
+
+/* ============================
+   Footer
+============================ */
+footer {
+    font-size: 0.9rem;
+}
+
+/* ============================
+   Responsive
+============================ */
+
+@media (max-width: 500px) {
+    #carrito-panel {
+        width: 100%;
+    }
+
+    .carrito-btn {
+        width: 95%;
+        right: 2.5%;
+        border-radius: 10px;
+    }
+}
