@@ -1,0 +1,413 @@
+/* ------------------------------------
+   RESET
+------------------------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #c6a664;
+    color: #fff;
+}
+
+/* ------------------------------------
+   LINKS & LISTAS
+------------------------------------ */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul, li {
+    list-style: none;
+}
+
+/* ------------------------------------
+   HEADER
+------------------------------------ */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #94131c;
+    padding: 15px 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.logo {
+    height: 80px;
+}
+
+/* Buscador */
+.buscador {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.buscador input {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #fff;
+    color: #333;
+    min-width: 200px;
+}
+
+.buscador button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #94131c;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.buscador button:hover {
+    background: #ffe6e6;
+    transform: translateY(-2px);
+}
+
+.user-nav {
+    display: flex;
+    gap: 18px;
+}
+
+.user-nav a {
+    font-weight: 600;
+    transition: opacity 0.25s;
+}
+
+.user-nav a:hover {
+    opacity: 0.75;
+}
+
+/* ------------------------------------
+   PRODUCTOS (GRID MODERNA)
+------------------------------------ */
+.section-products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 25px;
+}
+
+.producto {
+    background-color: #fff;
+    color: #94131c;
+    padding: 15px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 8px 10px 15px rgba(148, 19, 28, 0.4);
+    transition: transform 0.25s;
+}
+
+.producto:hover {
+    transform: translateY(-5px);
+}
+
+.producto img {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.producto h2 {
+    color: #333;
+    margin-bottom: 6px;
+}
+
+/* Descripción */
+.descripcion {
+    font-size: 0.9rem;
+    color: #555;
+    min-height: 60px;
+}
+
+/* Precio */
+.precio {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.precio .valor {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #2c2c2c;
+}
+
+.precio .descuento {
+    font-size: 0.85rem;
+    background: #ffe5e5;
+    color: #d32f2f;
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+
+/* Botón añadir */
+.btn-add {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 20px;
+    background: #94131c;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.btn-add:hover {
+    background: #b71c2e;
+    transform: translateY(-3px);
+}
+
+/* ------------------------------------
+   FORMULARIOS
+------------------------------------ */
+.formulario {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #94131c;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+
+.formulario fieldset {
+    border: none;
+}
+
+.formulario div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.formulario label {
+    font-weight: 500;
+}
+
+.formulario input,
+.formulario select,
+.formulario textarea {
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.formulario input:focus,
+.formulario select:focus,
+.formulario textarea:focus {
+    background-color: rgba(255, 255, 255, 0.3);
+    outline: 2px solid #fff;
+}
+
+.formulario button {
+    flex: 1;
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #94131c;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.formulario button:hover {
+    background-color: #f5f5f5;
+}
+
+/* ------------------------------------
+   RESEÑAS
+------------------------------------ */
+.section-reviews {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    padding: 25px;
+}
+
+.review {
+    background: #fff;
+    color: #94131c;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 8px 10px 15px rgba(148, 19, 28, 0.4);
+    transition: transform 0.25s;
+}
+
+.review:hover {
+    transform: translateY(-5px);
+}
+
+/* ------------------------------------
+   FOOTER
+------------------------------------ */
+footer {
+    background-color: #94131c;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 25px;
+}
+
+footer img {
+    height: 60px;
+}
+
+/* ------------------------------------
+   RESPONSIVE (MOBILE)
+------------------------------------ */
+@media (max-width: 480px) {
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .user-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .producto {
+        width: 100%;
+    }
+}
+
+/* ------------------------------------
+   CARRITO
+------------------------------------ */
+
+.carrito-lista {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    gap: 15px;
+}
+
+.carrito-lista li {
+    background-color: #fff;
+    color: #94131c;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 8px 10px 15px rgba(148, 19, 28, 0.4);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.producto-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cantidad {
+    background-color: #b71c2e;
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.btn-eliminar {
+    background: #94131c;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-eliminar:hover {
+    background: #b71c2e;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+    width: auto;
+    border-radius: 8px;
+    background: #94131c;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-small:hover {
+    background: #b71c2e;
+}
+
+.total-item {
+  background-color: #fff;
+  color: #94131c;
+  padding: 15px;
+  border-radius: 14px;
+  box-shadow: 8px 10px 15px rgba(148, 19, 28, 0.4);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carrito-lista-item {
+    background-color: #fff;
+    color: #94131c;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 8px 10px 15px rgba(148, 19, 28, 0.4);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#btn-pagar {
+    background: #94131c;
+    color: #fff;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#btn-pagar:hover {
+    background: #b71c2e;
+    transform: translateY(-3px);
+}
+
+
