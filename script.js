@@ -519,44 +519,6 @@ function animarImagenAlCarrito(clickEvent, imgElement) {
     }, 650);
 }
 
-// ======= Formulario contacto con Formspree =======
-const formContacto = document.getElementById("form-contacto");
-if (formContacto) {
-  const mensajeExito = document.createElement("p");
-  mensajeExito.style.color = "green";
-  mensajeExito.style.display = "none";
-  mensajeExito.style.marginTop = "10px";
-  formContacto.appendChild(mensajeExito);
-
-  formContacto.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    mensajeExito.style.display = "none";
-
-    const formData = new FormData(formContacto);
-
-    try {
-      const response = await fetch(formContacto.action, {
-        method: formContacto.method,
-        body: formData,
-        headers: {
-          "Accept": "application/json"
-        }
-      });
-
-      if (response.ok) {
-        mensajeExito.textContent = "Mensaje enviado con éxito. ¡Gracias!";
-        mensajeExito.style.display = "block";
-        formContacto.reset();
-      } else {
-        alert("Error al enviar el mensaje. Por favor, intenta de nuevo más tarde.");
-      }
-    } catch (error) {
-      alert("Error de red. Por favor, intenta de nuevo más tarde.");
-      console.error(error);
-    }
-  });
-}
-
 
 
 // ==============================
