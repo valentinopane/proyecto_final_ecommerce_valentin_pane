@@ -16,7 +16,7 @@ const carritoTotal = document.getElementById("carrito-total");
 
 // Crear/insertar controles (search, tema, paginación) si no existen
 function crearControlesUI() {
-    // Wrapper para controles encima de productos
+// Wrapper para controles encima de productos
     let controles = document.getElementById("controles-productos");
     if (!controles) {
         controles = document.createElement("div");
@@ -31,7 +31,7 @@ function crearControlesUI() {
         listaProductos.parentNode.insertBefore(controles, listaProductos);
     }
 
-    // Buscador (input)
+// Buscador (input)
     if (!document.getElementById("buscador-productos")) {
         const buscador = document.createElement("input");
         buscador.id = "buscador-productos";
@@ -48,9 +48,7 @@ function crearControlesUI() {
         controles.appendChild(buscador);
     }
 
-
-
-    // Contenedor de paginación
+// Contenedor de paginación
     if (!document.getElementById("paginacion-productos")) {
         const pagWrap = document.createElement("div");
         pagWrap.id = "paginacion-productos";
@@ -520,6 +518,46 @@ function animarImagenAlCarrito(clickEvent, imgElement) {
         ], { duration: 300, easing: "ease-out" });
     }, 650);
 }
+
+// ======= Formulario contacto con Formspree =======
+const formContacto = document.getElementById("form-contacto");
+if (formContacto) {
+  const mensajeExito = document.createElement("p");
+  mensajeExito.style.color = "green";
+  mensajeExito.style.display = "none";
+  mensajeExito.style.marginTop = "10px";
+  formContacto.appendChild(mensajeExito);
+
+  formContacto.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    mensajeExito.style.display = "none";
+
+    const formData = new FormData(formContacto);
+
+    try {
+      const response = await fetch(formContacto.action, {
+        method: formContacto.method,
+        body: formData,
+        headers: {
+          "Accept": "application/json"
+        }
+      });
+
+      if (response.ok) {
+        mensajeExito.textContent = "Mensaje enviado con éxito. ¡Gracias!";
+        mensajeExito.style.display = "block";
+        formContacto.reset();
+      } else {
+        alert("Error al enviar el mensaje. Por favor, intenta de nuevo más tarde.");
+      }
+    } catch (error) {
+      alert("Error de red. Por favor, intenta de nuevo más tarde.");
+      console.error(error);
+    }
+  });
+}
+
+
 
 // ==============================
 // Inicialización
