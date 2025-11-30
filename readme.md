@@ -1,81 +1,104 @@
-# proyecto_final_ecommerce_valentin_pane
-Proyecto final ecommerce de Valentin Pane para Talento Tech 
+La Tiendita del Barrio
 
-# Pane & Vino
+Proyecto Final – Talento Tech Front End
 
-### Proyecto Front End – Talento Tech
-
-Pane & Vino es una tienda online de vinos desarrollada como parte del curso **Talento Tech Front End**.
-Incluye catálogo dinámico, buscador, carrito de compras, navegación entre páginas y diseño adaptable para móviles.
+**La Tiendita del Barrio** es una tienda online simple desarrollada como proyecto final del curso **Talento Tech**.
+Incluye catálogo dinámico, sistema de carrito, animaciones, reseñas, formulario de contacto y un diseño limpio y responsive.
 
 ---
 
-## Tecnologías utilizadas
+Tecnologías utilizadas
 
-### **Frontend**
+**Frontend**
 
 * **HTML5** – estructura principal del sitio
-* **CSS3** – estilos, diseño responsive y estética general
-* **Flexbox** – distribución flexible de componentes
-* **Media Queries** – adaptación a pantallas móviles
-* **JavaScript (ES6+)** – lógica del sitio
+* **CSS3** – estilos, estética y diseño responsive
+* **Bootstrap 5** – componentes y utilidades predefinidas
+* **Google Fonts (Montserrat)** – tipografía moderna
+* **JavaScript (ES6+)** – lógica del ecommerce
 
-### **JavaScript / DOM**
+**JavaScript / DOM**
 
-* Manipulación del DOM para imprimir productos en HTML
-* Generación dinámica del catálogo desde arrays
-* Sistema de carrito almacenado en memoria
-* Funciones de agregar, mostrar y eliminar productos
-* Buscador de productos por nombre
-* Navegación dinámica con botones y eventos
+* Render dinámico del catálogo desde arrays
+* Sistema de carrito con:
 
----
-
-## Objetivo del proyecto
-
-El objetivo de Pane & Vino es aplicar los fundamentos clave del desarrollo Front End:
-
-* Maquetación clara y semántica en HTML
-* Aplicación de estilos modernos con CSS
-* Diseño responsive con Media Queries
-* Organización correcta de carpetas y archivos
-* Lógica en JavaScript para manejar catálogo y carrito
-* Práctica del uso del DOM, eventos y funciones
+  * agregar producto
+  * eliminar producto
+  * mostrar total
+  * vaciar carrito
+* Panel lateral de carrito con animación
+* Eventos, listeners y manipulación del DOM
+* Animación personalizada: imagen “vuela” al carrito
+* Formulario de contacto conectado a **Formspree**
 
 ---
 
-##  Funcionalidades principales
+Objetivo del proyecto
 
-### Catálogo dinámico
+Aplicar todos los contenidos vistos en el curso Front End:
 
-Los productos se crean desde JavaScript mediante un array de objetos y se imprimen en el DOM automáticamente.
+* HTML semántico
+* Estilos modernos y responsive
+* Bootstrap + CSS personalizado
+* Interacción con JavaScript
+* Uso del DOM para construir contenido dinámico
+* Creación de un carrito funcional
+* Animaciones y experiencia de usuario
 
-###  Carrito de compras
+---
+Funcionalidades principales
 
-* Botón “Agregar al carrito” en cada producto
-* Vista del carrito en **carrito.html**
-* Cálculo del total
-* Eliminación de productos del carrito
-* Renderizado automático del carrito con DOM
+Catálogo dinámico
 
-###  Navegación
+Los productos se generan en JavaScript desde un array y se imprimen en el DOM automáticamente.
 
-* Páginas: *index.html* (inicio), *productos.html*, *carrito.html*
-* Menú superior funcional en todas las páginas
+ Carrito de compras
 
-###  Responsive Design
+* Panel lateral deslizable
+* Contador actualizado en tiempo real
+* Total automático
+* Botones de vaciar y comprar
+* Animación del producto que vuela al carrito
 
-Compatible con pantallas de celular, tablet y desktop.
+ Reseñas simuladas
+
+Sección con opiniones de clientes, maquetada en diseño grid.
+
+Formulario de contacto
+
+Formulario funcional conectado a **Formspree** para recibir mensajes por correo.
+
+Responsive Design
+
+Compatible con teléfonos, tablets y pantallas grandes.
 
 ---
 
-##  Estado del proyecto
+Estructura del proyecto
 
-En desarrollo continuo: se están mejorando funcionalidades y optimizando el carrito con almacenamiento local (localStorage) y mejor diseño visual.
+```
+/proyecto_final_ecommerce_valentin_pane
+│── index.html
+│── styles.css
+│── script.js
+└── README.md
+```
 
 ---
 
-## Autor
+ Estado del proyecto
+
+El proyecto está **completo y funcional**, con margen para futuras mejoras como:
+
+* integración de API real
+* almacenamiento local (localStorage)
+* filtros avanzados de productos
+* login / autenticación básica
+
+---
+
+ Autor
 
 **Valentín Pane**
-Proyecto realizado en el marco del curso **Talento Tech Front End**.
+Proyecto final del curso **Talento Tech Front End (Gobierno de la Ciudad de Buenos Aires)**.
+
